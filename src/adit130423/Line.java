@@ -41,13 +41,14 @@ public class Line implements Relation {
             double aLen = ((Line)a).getLength();
             double bLen = ((Line)b).getLength();
             return (aLen == bLen);
+        }
             
         public static void main(String[] args){
             Line a = new Line (1,5,1,3);
             Line b = new Line  (3,7,1,3);
         
-            System.out.println("a > b " + b.isGreater(a,b));
-            System.out.println("a < b " + b.isLess(a,b));
-            System.out.println("a = b " + b.isEqual(a,b));
+            System.out.println("a > b " + a.isGreater(a,b));
+            System.out.println("a < b " + a.isLess(a,b));
+            System.out.println("a = b " + a.isEqual(a,b));
         }
 }
