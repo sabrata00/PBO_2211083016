@@ -1,17 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package adit.dao;
+package adit.Dao;
 
-import adit.model.peminjaman;
+import java.util.List;
 
-/**
- *
- * @author LABP1KOMP
- */
-public interface peminjamanDao {
-     void insert (peminjaman peminjaman) throws Exception;
-    
+import adit.Model.Peminjaman;
+
+public interface PeminjamanDao {
+    void Insert(Peminjaman pm) throws Exception;
+
+    void Update(Peminjaman pm) throws Exception;
+
+    void Delete(Peminjaman pm) throws Exception;
+
+    Peminjaman getPm(String kodeBuku, String kodeanggota, String tglpinjam) throws Exception;
+
+    List<Peminjaman> getAll() throws Exception;
 }

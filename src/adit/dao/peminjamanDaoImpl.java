@@ -1,72 +1,84 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package adit.dao;
+package adit.Dao;
 
-import adit.model.peminjaman;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author LABP1KOMP
- */
-public class peminjamanDaoImpl {
-    public class PeminjamanDaoImpl implements  peminjamanDao{
-    private Connection connection;
-    
-    public PeminjamanDaoImpl(Connection connection ){
-        this.connection = connection;
+import adit.Model.Peminjaman;
+import adit.View.FormPeminjamandb;
+
+public class PeminjamanDaoImpl implements PeminjamanDao {
+    private Connection cn;
+    private Peminjaman pm = new Peminjaman();
+    private AnggotaDao dao;
+    private FormPeminjamandb form;
+
+    public PeminjamanDaoImpl(Connection cn) throws Exception {
+        this.cn = cn;
+        dao = new AnggotaDaoImpl(cn);
     }
-    
-    
-    public void insert (peminjaman anggota) throws Exception{
-        String sql = "insert into anggota values(?,?,?,?)";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, anggota.getKodeanggota());
-        ps.setString(2, anggota.getKodebuku());
-        ps.setString(3, anggota.getTglpinjam());
-        ps.setString(4, anggota.getTglkembali());
+
+    public void Insert(Peminjaman pm) throws Exception {
+        String insert = "INSERT INTO Peminjaman VALUES(?,?,?,?)";
+        PreparedStatement ps = cn.prepareStatement(insert);
+        ps.setString(1, pm.getKodeagg());
+        ps.setString(2, pm.getKodebuku());
+        ps.setString(3, pm.getTanggalPinjam());
+        ps.setString(4, pm.getTanggalKemabli());
         ps.executeUpdate();
-        ps.close();
-                
     }
-    
-    public peminjaman getpeminjaman(String kodeanggota) throws Exception {
-        String sql = "Select * FROM anggota WHERE kodeanggota =?";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, kodeanggota);
+
+    public void Update(Peminjaman pm) throws Exception {
+        String update = "UPDATE Peminjaman set tanggalKembali = ? WHERE kodeBuku = ? && kodeAnggota = ? && tanggalPinjam = ?";
+        PreparedStatement ps = cn.prepareStatement(update);
+        ps.setString(1, pm.getTanggalKemabli());
+        ps.setString(2, pm.getKodebuku());
+        ps.setString(3, pm.getKodeagg());
+        ps.setString(4, pm.getTanggalPinjam());
+        ps.executeUpdate();
+    }
+
+    public void Delete(Peminjaman pm) throws Exception {
+        String delete = "DELETE FROM Peminjaman WHERE kodeBuku = ? && kodeAnggota = ? && tanggalPinjam = ?";
+        PreparedStatement ps = cn.prepareStatement(delete);
+        ps.setString(1, pm.getKodebuku());
+        ps.setString(2, pm.getKodeagg());
+        ps.setString(3, pm.getTanggalPinjam());
+        ps.executeUpdate();
+    }
+
+    public Peminjaman getPm(String kodeBuku, String kodeanggota, String tglpinjam) throws Exception {
+        String get = "SELECT * FROM Peminjaman WHERE kodeBuku= ? && kodeAnggota = ? && tanggalPinjam = ?";
+        PreparedStatement ps = cn.prepareStatement(get);
+        ps.setString(1, kodeBuku);
+        ps.setString(2, kodeanggota);
+        ps.setString(3, tglpinjam);
         ResultSet rs = ps.executeQuery();
-        peminjaman anggota = null;
-        if(rs.next()){
-            anggota = new peminjaman();
-            anggota.setKodeanggota(rs.getString(1));
-            anggota.setKodebuku(rs.getString(2));
-            anggota.setTglpinjam(rs.getString(3));
-            anggota.setTglkembali(rs.getString(4));
-            
+        if (rs.next()) {
+            pm = new Peminjaman();
+            pm.setKodeagg(rs.getString(1));
+            pm.setKodebuku(rs.getString(2));
+            pm.setTanggalPinjam(rs.getString(3));
+            pm.setTanggalKemabli(rs.getString(4));
         }
-        return anggota;
+        return pm;
     }
-    public List<peminjaman> getAll() throws Exception{
-        String sql = "Select * FROM anggota";
-        PreparedStatement ps = connection.prepareStatement(sql);
+
+    public List<Peminjaman> getAll() throws Exception {
+        String tampil = "SELECT * FROM Peminjaman";
+        PreparedStatement ps = cn.prepareStatement(tampil);
         ResultSet rs = ps.executeQuery();
-        peminjaman anggota;
-        List<peminjaman> list = new ArrayList<>();
-        while(rs.next()){
-            anggota = new peminjaman();
-            anggota.setKodeanggota(rs.getString(1));
-            anggota.setKodebuku(rs.getString(2));
-            anggota.setTglpinjam(rs.getString(3));
-            anggota.setTglkembali(rs.getString(4));
-            list.add(anggota);
+        List<Peminjaman> data = new ArrayList<>();
+        while (rs.next()) {
+            pm = new Peminjaman();
+            pm.setKodeagg(rs.getString(1));
+            pm.setKodebuku(rs.getString(2));
+            pm.setTanggalPinjam(rs.getString(3));
+            pm.setTanggalKemabli(rs.getString(4));
+            data.add(pm);
         }
-        return list;
-    }
-    
+        return data;
     }
 }

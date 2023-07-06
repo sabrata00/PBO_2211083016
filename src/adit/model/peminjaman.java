@@ -1,61 +1,51 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package adit.model;
+package adit.Model;
 
-/**
- *
- * @author LABP1KOMP
- */
-public class peminjaman {
-    private String kodeanggota;
+public class Peminjaman {
+    private String kodeagg;
     private String kodebuku;
-    private String tglpinjam;
-    private String tglkembali;
-    
-    public peminjaman() {
-        
+    private String tanggalPinjam;
+    private String tanggalKemabli;
+
+    public Peminjaman() {
     }
-    public peminjaman(String kodeanggota, String kodebuku, String tglpinjam, String tglkembali) {
-        this.kodeanggota = kodeanggota;
+
+    public Peminjaman(String kodeagg, String kodebuku, String tanggalPinjam, String tanggalKemabli) {
+        this.kodeagg = kodeagg;
         this.kodebuku = kodebuku;
-        this.tglpinjam = tglpinjam;
-        this.tglkembali = tglkembali;
+        this.tanggalPinjam = tanggalPinjam;
+        this.tanggalKemabli = tanggalKemabli;
     }
-    
-    public String getKodeanggota() {
-        return kodeanggota;
+
+    public String getKodeagg() {
+        return kodeagg;
     }
-    
-    public void setKodeanggota(String kodeanggota) {
-        this.kodeanggota = kodeanggota;
+
+    public void setKodeagg(String kodeagg) {
+        this.kodeagg = kodeagg;
     }
 
     public String getKodebuku() {
         return kodebuku;
     }
-    
+
     public void setKodebuku(String kodebuku) {
-        this.tglpinjam = kodebuku;
-    }
-    
-    public String getTglpinjam() {
-        return tglpinjam;
+        this.kodebuku = kodebuku;
     }
 
-    public void setTglpinjam(String tglpinjam) {
-        this.tglpinjam = tglpinjam;
+    public String getTanggalPinjam() {
+        return tanggalPinjam;
     }
 
-    public String getTglkembali() {
-        return tglkembali;
+    public void setTanggalPinjam(String tanggalPinjam) {
+        this.tanggalPinjam = tanggalPinjam;
     }
 
-    public void setTglkembali(String tglkembali) {
-        this.tglkembali= tglkembali;
+    public String getTanggalKemabli() {
+        return tanggalKemabli;
     }
 
-    
+    public void setTanggalKemabli(String tanggalKemabli) {
+        this.tanggalKemabli = tanggalKemabli;
+    }
+
 }

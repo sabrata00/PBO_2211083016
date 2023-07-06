@@ -1,18 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
-package adit.dao;
+package adit.Dao;
 
-import adit.model.Anggota;
+import java.util.List;
 
-/**
- *
- * @author LAB-MM
- */
+import adit.Model.*;
+
 public interface AnggotaDao {
-   void insert (Anggota anggota) throws Exception;
+    void insert(Anggota agg) throws Exception;
 
+    void update(Anggota agg) throws Exception;
 
-    
+    void delete(String kode) throws Exception;
+
+    Anggota getAgg(String kode) throws Exception;
+
+    List<Anggota> getAll() throws Exception;
 }

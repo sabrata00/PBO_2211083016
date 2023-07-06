@@ -2,20 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package adit.model;
+package adit.Model;
 
 /**
  *
- * @author LAB-MM
+ * @author pitokdf
  */
 public class Anggota {
     private String kodeanggota;
     private String namaanggota;
     private String alamat;
     private String jeniskelamin;
-    
-    public Anggota (){
-        
+
+    public Anggota() {
     }
 
     public Anggota(String kodeanggota, String namaanggota, String alamat, String jeniskelamin) {
@@ -56,8 +55,4 @@ public class Anggota {
     public void setJeniskelamin(String jeniskelamin) {
         this.jeniskelamin = jeniskelamin;
     }
-    
-    
-    
-    
 }
